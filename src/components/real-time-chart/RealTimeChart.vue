@@ -84,7 +84,6 @@ const chartOptions = ref({
 
 const removeOldData = () => {
   if (data.length - 60 > 0) {
-    console.log('Removing old data', data)
     data = data.slice(data.length - 60, data.length)
   }
 }

@@ -46,7 +46,7 @@ const hideMobileMenu = () => {
     <!-- Mobile header -->
     <div class="fixed z-40 w-full h-24 bg-neutral-800 min-[981px]:hidden flex items-center justify-between px-10">
       <h1 class="text-white text-2xl">OPC UA</h1>
-      <button class="h-14 w-14 text-white text-xl cursor-pointer flex items-center justify-center" @click="showMobilMenu">
+      <button id="options-button" class="h-14 w-14 text-white text-xl cursor-pointer flex items-center justify-center" @click="showMobilMenu">
         <svg-icon :fa-icon="menuIcon" :size="35" flip="horizontal"></svg-icon>
       </button>
     </div>
@@ -54,7 +54,7 @@ const hideMobileMenu = () => {
     <!-- Mobile menu-->
     <div v-if="isActiveMobileSidebar" class="absolute top-0 z-50 h-screen w-screen bg-white flex-col min-[981px]:hidden overflow-hidden" >
       <div id="sidebar-title" class="py-8 ">
-        <button class="float-right h-10 w-10 text-black text-xl cursor-pointer flex items-center justify-center mr-10" @click="hideMobileMenu">
+        <button  id="close-menu-button" class="float-right h-10 w-10 text-black text-xl cursor-pointer flex items-center justify-center mr-10" @click="hideMobileMenu">
           <svg-icon :fa-icon="closeIcon" :size="35" flip="horizontal"></svg-icon>
         </button>
         <h1 class="text-black text-2xl text-left pl-10 pt-8">OPC UA</h1>
