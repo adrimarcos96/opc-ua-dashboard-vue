@@ -1,6 +1,6 @@
 <script setup>
-import HeaderComponent from './components/header/HeaderComponent.vue'
-import FooterMobileComponent from './components/footer-mobile/FooterMobileComponent.vue'
+  import HeaderComponent from './components/header/HeaderComponent.vue'
+  import FooterMobileComponent from './components/footer-mobile/FooterMobileComponent.vue'
 </script>
 
 <template>
