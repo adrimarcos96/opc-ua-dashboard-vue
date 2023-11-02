@@ -26,7 +26,6 @@ const getData = () => {
 onMounted(() => {
   getData()
 })
-
 </script>
 
 <template>

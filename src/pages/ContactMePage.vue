@@ -103,10 +103,10 @@ onUnmounted(() => {
             <p v-if="$v.message.$error" class="text-red-500 text-xs italic">{{ $v.message.$errors[0].$message }}</p>
         </div>
         <div class="flex items-center justify-center">
-            <button v-if="!isLoading" @click="submitForm()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold max-[981px]:w-full w-1/2 py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+            <button id="submit-button" v-if="!isLoading" @click="submitForm()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold max-[981px]:w-full w-1/2 py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 Send
             </button>
-            <button v-else disabled="true" class="bg-blue-500 hover:bg-blue-700 text-white font-bold max-[981px]:w-full py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+            <button id="loading-submit-button" v-else disabled="true" class="bg-blue-500 hover:bg-blue-700 text-white font-bold max-[981px]:w-full py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 Loading...
             </button>
         </div>
