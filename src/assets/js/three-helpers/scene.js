@@ -75,7 +75,7 @@ export class Canvas3D {
   }
 
   addRoom () {
-    this.gltLoader.load('./src/assets/three-models/room3d.glb', (gltf) => {
+    this.gltLoader.load('./three-models/room3d.glb', (gltf) => {
       let room = gltf.scene
       room.receiveShadow = true
       room.castShadow = true
@@ -87,7 +87,7 @@ export class Canvas3D {
   }
 
   addEnvironmentLight() {
-    this.rgbeLoader.load('./src/assets/three-models/WhiteNeons_NAD.hdr', (texture) => {
+    this.rgbeLoader.load('./three-models/WhiteNeons_NAD.hdr', (texture) => {
       texture.mapping = EquirectangularReflectionMapping
       this.scene.environment = texture
     })
