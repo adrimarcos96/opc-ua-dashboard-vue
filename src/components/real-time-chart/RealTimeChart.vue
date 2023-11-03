@@ -3,18 +3,18 @@ import { ref, onMounted, watch } from 'vue'
 import ApexChart from 'vue3-apexcharts'
 
 const props = defineProps({
+  id: String,
   title: String,
   serieName: String,
   height: Number,
+  initialData: Array,
   lastData: Object
 })
-
-let data = []
 
 const chart = ref(null)
 const series = ref([{
   name: props.serieName || '',
-  data: data.slice()
+  data: []
 }])
 const chartOptions = ref({
   chart: {
@@ -83,20 +83,38 @@ const chartOptions = ref({
 })
 
 const removeOldData = () => {
-  if (data.length - 60 > 0) {
-    data = data.slice(data.length - 60, data.length)
+  if (series.value[0].data.length - 60 > 0) {
+    series.value[0].data = series.value[0].data.slice(series.value[0].data.length - 60, series.value[0].data.length)
   }
 }
+
+const mapInitialData = () => {
+  const data = props.initialData.map(params => {
+    return { x: params.date, y: params[props.id] }
+  })
+
+  return data
+}
+
+watch(
+  () => props.initialData,
+  (initialData) => {
+    if (initialData && initialData.length > 0) {
+      const mappedData = mapInitialData()
+      series.value[0].data = mappedData
+    }
+  }
+)
 
 watch(
   () => props.lastData,
   (lastData) => {
     // Adding a new value to the dataset
     if (chart.value !== null) {
-      data.push({ x: lastData.date, y: lastData.value })
+      series.value[0].data.push({ x: lastData.date, y: lastData.value })
 
       // Updating the chart
-      chart.value.updateSeries([{ data }])
+      // chart.value.updateSeries([{ data }])
     }
   }
 )
@@ -107,16 +125,14 @@ onMounted(() => {
     if (chart.value !== null) {
       removeOldData()
 
-      chart.value.updateSeries([{
-        data
-      }], false, true)
+      chart.value.updateSeries(series.value, false, true)
     }
-  }, 60000)
+  }, 10000)
 })
 </script>
 
 <template>
   <div id="chart" class="w-full">
-    <ApexChart type="line" :height="height" ref="chart" :options="chartOptions" :series="series" />
+    <ApexChart v-if="series[0].data.length > 0" type="line" :height="height" ref="chart" :options="chartOptions" :series="series" />
   </div>
 </template>
