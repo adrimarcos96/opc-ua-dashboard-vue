@@ -4,7 +4,6 @@ import {
   PerspectiveCamera,
   AxesHelper,
   GridHelper,
-  EquirectangularReflectionMapping,
   SRGBColorSpace,
   ACESFilmicToneMapping,
   SpotLight
