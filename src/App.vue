@@ -11,7 +11,6 @@ import FooterMobileComponent from './components/footer-mobile/FooterMobileCompon
       <router-view></router-view>
       <FooterMobileComponent />
     </main>
-
   </div>
 </template>
 

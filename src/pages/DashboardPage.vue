@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import RealTimeChart from '../components/real-time-chart/RealTimeChart.vue'
-import { getParamsDataInRealTime } from '../services/paramtersService'
+import { getParamsDataInRealTime, getInitialParamsData } from '../services/paramtersService'
 
 const params = ref({
   date: new Date(),
@@ -9,6 +9,8 @@ const params = ref({
   pressure: '-',
   humidity: '-'
 })
+
+const data = ref([])
 
 const getData = () => {
   setInterval(() => {
@@ -25,6 +27,16 @@ const getData = () => {
 
 onMounted(() => {
   getData()
+  const fetchedData = getInitialParamsData()
+  data.value = fetchedData
+
+  const lastParams = fetchedData[fetchedData.length - 1]
+  params.value = {
+    date: lastParams.date,
+    temperature: `${lastParams.temperature} °C`,
+    pressure: `${lastParams.pressure} °C`,
+    humidity: `${lastParams.humidity} °C`
+  }
 })
 </script>
 
@@ -49,15 +61,15 @@ onMounted(() => {
       </div>
     </div>
 
-    <div id="chats-section" class="w-full flex flex-wrap justify-center items-center mb-5 min-[981px]:px-2">
+    <div id="chats-section" class="w-full flex flex-wrap justify-center items-center mb-5 min-[981px]:px-5">
       <div class="w-full mb-5">
-        <RealTimeChart title="Temperature last 5 minutes" serieName="Temperature (°C)" :height="250" :lastData="{ date: params.date, value: params.temperature }" />
+        <RealTimeChart id="temperature" title="Temperature last 5 minutes" serieName="Temperature (°C)" :height="250" :initialData="data" :lastData="{ date: params.date, value: params.temperature }" />
       </div>
       <div class="w-full min-[981px]:w-[48%] min-[981px]:mr-[2%] mb-5">
-        <RealTimeChart title="Pressure last 5 minutes" serieName="Pressure (Pa)" :height="250" :lastData="{ date: params.date, value: params.pressure }" />
+        <RealTimeChart id="pressure" title="Pressure last 5 minutes" serieName="Pressure (Pa)" :height="250" :initialData="data" :lastData="{ date: params.date, value: params.pressure }" />
       </div>
       <div class="w-full min-[981px]:w-[48%] min-[981px]:ml-[2%] mb-5">
-        <RealTimeChart title="Humidity last 5 minutes" serieName="Humidity (%)" :height="250" :lastData="{ date: params.date, value: params.humidity }" />
+        <RealTimeChart id="humidity" title="Humidity last 5 minutes" serieName="Humidity (%)" :height="250" :initialData="data" :lastData="{ date: params.date, value: params.humidity }" />
       </div>
     </div>
   </div>
