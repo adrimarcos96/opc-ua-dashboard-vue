@@ -73,7 +73,7 @@ const submitForm = (event) => {
       console.log('Data sent', formFields.value)
 
       // Show success message
-      toast.success('Successfully sent message', toastOptions)
+      toast.success('Message sent successfully', toastOptions)
       resetForm()
     }, 3000)
   } else {
@@ -106,7 +106,6 @@ onUnmounted(() => {
   <div class="w-full  overflow-hidden">
     <div class="absolute float-left max-[981px]:w-full w-96 max-[981px]:px-2.5 min-[981px]:px-10 max-[981px]:pt-10 min-[981px]:pt-24">
       <form class="bg-gray-700 opacity-90 shadow-md rounded-sm px-8 pt-8 pb-8">
-        
         <div class="flex items-center justify-center mb-3">
           <p class="text-xl text-white"> Contact me</p>
         </div>
