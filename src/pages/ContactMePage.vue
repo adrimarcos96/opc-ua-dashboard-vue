@@ -108,7 +108,7 @@ onUnmounted(() => {
       <form class="bg-gray-700 opacity-90 shadow-md rounded-sm px-8 pt-10 pb-8">
         <div class="mb-4">
           <label class="block text-white text-sm font-bold mb-2" for="email">Email*</label>
-          <input v-model="formFields.email" :class="`shadow appearance-none border rounded-sm w-full h-12 py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline ${$v.email.$error ? 'border-red-500' : ''}`" id="email" type="email" placeholder="example@gmail.com">
+          <input v-model="formFields.email" :class="`shadow appearance-none border rounded-sm w-full h-12 py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline ${$v.email.$error ? 'border-red-500' : ''}`" id="email" type="email" placeholder="Your email">
           <p v-if="$v.email.$error" class="text-red-500 text-xs italic">{{ $v.email.$errors[0].$message }}</p>
         </div>
         <div class="mb-6">
