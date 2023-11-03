@@ -105,14 +105,18 @@ onUnmounted(() => {
 <template>
   <div class="w-full  overflow-hidden">
     <div class="absolute float-left max-[981px]:w-full w-96 max-[981px]:px-2.5 min-[981px]:px-10 max-[981px]:pt-10 min-[981px]:pt-24">
-      <form class="bg-gray-700 opacity-90 shadow-md rounded-sm px-8 pt-10 pb-8">
+      <form class="bg-gray-700 opacity-90 shadow-md rounded-sm px-8 pt-8 pb-8">
+        
+        <div class="flex items-center justify-center mb-3">
+          <p class="text-xl text-white"> Contact me</p>
+        </div>
         <div class="mb-4">
-          <label class="block text-white text-sm font-bold mb-2" for="email">Email*</label>
+          <label class="block text-white text-sm mb-2" for="email">Email*</label>
           <input v-model="formFields.email" :class="`shadow appearance-none border rounded-sm w-full h-12 py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline ${$v.email.$error ? 'border-red-500' : ''}`" id="email" type="email" placeholder="Your email">
           <p v-if="$v.email.$error" class="text-red-500 text-xs italic">{{ $v.email.$errors[0].$message }}</p>
         </div>
         <div class="mb-6">
-          <label class="block text-white text-sm font-bold mb-2" for="message">Message*</label>
+          <label class="block text-white text-sm mb-2" for="message">Message*</label>
           <textarea v-model="formFields.message" cols="3" :class="`shadow appearance-none border rounded-sm w-full max-h-36 min-h-12 py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline ${$v.message.$error ? 'border-red-500' : ''}`" id="message" placeholder="Write a message"></textarea>
           <p v-if="$v.message.$error" class="text-red-500 text-xs italic">{{ $v.message.$errors[0].$message }}</p>
         </div>
