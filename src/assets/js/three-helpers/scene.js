@@ -12,6 +12,11 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 // import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
+const limitRotation ={
+  max: 0.38395,
+  min: -0.41905
+}
+
 export class Canvas3D {
   constructor (canvas) {
     const size = {
@@ -111,7 +116,10 @@ export class Canvas3D {
   moveCamera (x) {
     if (this.camera && this.room) {
       const yRotation = ( - x - this.camera.position.x ) * 0.05
-      this.room.rotation.y = yRotation
+
+      if (yRotation < limitRotation.max && yRotation > limitRotation.min) {
+        this.room.rotation.y = yRotation
+      }
     }
   }
 

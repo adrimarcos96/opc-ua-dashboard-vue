@@ -18,8 +18,10 @@
     "vue": "^3.3.4",
     "vue-apexcharts": "^1.6.2",
     "vue-router": "^4.2.5",
+    "vue-toastr": "^3.0.5",
     "vue3-apexcharts": "^1.4.4",
-    "vue3-icon": "^2.1.0"
+    "vue3-icon": "^2.1.0",
+    "vue3-toastify": "^0.1.14"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.4.0",

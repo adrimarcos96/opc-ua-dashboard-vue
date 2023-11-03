@@ -7,6 +7,6 @@ import App from './App.vue'
 
 const app = createApp(App)
 
-app.component('svg-icon', SvgIcon);
+app.component('svg-icon', SvgIcon)
 app.use(router)
 app.mount('#app')
