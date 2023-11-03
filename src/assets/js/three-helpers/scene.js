@@ -4,12 +4,12 @@ import {
   PerspectiveCamera,
   AxesHelper,
   GridHelper,
-  EquirectangularReflectionMapping,
   SRGBColorSpace,
-  ACESFilmicToneMapping
+  ACESFilmicToneMapping,
+  SpotLight
 } from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
+// import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 export class Canvas3D {
@@ -36,17 +36,17 @@ export class Canvas3D {
 
     // Init camera
     this.camera = new PerspectiveCamera(75, size.width / size.height, 0.1, 1000)
-    this.camera.position.set(-5.29, 2.64, 3.55)
-    this.camera.rotation.set(-0.64, -0.87, -0.51)
+    this.camera.position.set(0.356, -0.073, 3.316)
+    this.camera.rotation.set(-0.1022, -0.0549, -0.0056)
 
     // Init orbit control
     // this.orbitControl = new OrbitControls(this.camera, this.canvas)
     // this.orbitControl.update()
-    // this.orbitControl.addEventListener('change', () => console.log(this.camera.rotation))
+    // this.orbitControl.addEventListener('change', () => console.log(this.camera.position))
 
     // Init loaders
     this.gltLoader = new GLTFLoader()
-    this.rgbeLoader = new RGBELoader()
+    // this.rgbeLoader = new RGBELoader()
   }
 
   showAxesHelper () {
@@ -61,7 +61,7 @@ export class Canvas3D {
   }
 
   render () {
-    this.addEnvironmentLight()
+    this.addLight()
     this.addRoom()
 
     const animate = () => {
@@ -75,7 +75,7 @@ export class Canvas3D {
   }
 
   addRoom () {
-    this.gltLoader.load('./three-models/room3d.glb', (gltf) => {
+    this.gltLoader.load('./three-models/dining_room.glb', (gltf) => {
       let room = gltf.scene
       room.receiveShadow = true
       room.castShadow = true
@@ -86,11 +86,18 @@ export class Canvas3D {
     })
   }
 
-  addEnvironmentLight() {
-    this.rgbeLoader.load('./three-models/WhiteNeons_NAD.hdr', (texture) => {
-      texture.mapping = EquirectangularReflectionMapping
-      this.scene.environment = texture
-    })
+  addLight () {
+    const spotL1 = new SpotLight('white', 400)
+    spotL1.position.set(6.134189177716149, 5.070504083758956, 5.710233787082724)
+    this.scene.add(spotL1)
+
+    const spotL2 = new SpotLight('white', 400)
+    spotL2.position.set(-10.241626287874897, 6.114524086167419, 5.939639697589269)
+    this.scene.add(spotL2)
+
+    const spotL3 = new SpotLight('white', 400)
+    spotL3.position.set(-0.07421061718939888, -11.420436975597038, 0.29881201073197405)
+    this.scene.add(spotL3)
   }
 
   onResize (width, height) {
@@ -110,7 +117,6 @@ export class Canvas3D {
 
   destroyScene () {
     delete this.gltLoader
-    delete this.rgbeLoader
     delete this.room
     delete this.camera
     delete this.scene
